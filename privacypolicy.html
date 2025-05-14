@@ -1,0 +1,116 @@
+{% extends 'base.html' %}
+{% load static%}
+
+{% block content %}
+
+    <!----------main-------------->
+    <div class="container my-4 px-3">
+        <h1 class="text-center fw-bold mb-4 bg-">Privacy Policy</h1>
+          <h5>
+            <span><a href="/" class="text-decoration-none fw-bold large">PrepIT</a></span> ("we," "us," or "our") is committed to protecting the privacy and security of our users' personal information. This Privacy Policy explains how we collect, use, share, and protect personal data when you visit our website (the "Site"), use our services (the "Services"), or interact with us.<br><br>
+                    <h3 class="fw-bold">Scope</h3><br>
+                    <h5>
+                      This Privacy Policy applies to all users of the Site and Services, including but not limited to:<br>
+                      <ul>
+                        <li>Visitors to our Site</li>
+                        <li>Users who create an account or profile on our Site</li>
+                        <li>Users who participate in quizzes or other activities on our Site</li>
+                      </ul>
+                      </h5>
+                    <br><br>
+                    <h3 class="fw-bold">Information We Collect</h3><br>
+                    <h5>
+                        We collect personal data that you voluntarily provide to us, as well as data that is automatically collected when you visit our Site or use our Services. The types of personal data we collect include:
+                      <br>
+                      <ul>
+                        <li>Contact Information: Name, email address, phone number, and other contact details.</li>
+                        <li>Account Information: Username, password, and other information related to your account.</li>
+                        <li>Profile Information: Profile picture, bio, and other information you choose to share.</li>
+                        <li>Quiz and Activity Data: Your performance, scores, and other data related to your participation in quizzes and activities.</li>
+                        <li>Technical Data: IP address, browser type, device type, operating system, and other technical information.</li>
+                        <li>Usage Data: Pages visited, time spent on our Site, and other data related to your use of our Services.</li>
+                      </ul>
+                    </h5>
+                    <br><br>
+                    <h3 class="fw-bold">How We Use Your Information</h3><br>
+                    <h5>
+                        We use your personal data for various purposes, including:<br>
+                      <ul>
+                        <li>Providing Our Services: To operate, maintain, and improve our Site and Services.</li>
+                        <li>Communicating with You: To respond to your inquiries, send newsletters, and provide updates on our Services.</li>
+                        <li>Personalizing Your Experience: To tailor our Services to your interests and preferences.</li>
+                        <li>Improving Our Services: To analyze usage patterns, identify trends, and make improvements to our Site and Services.</li>
+                        <li>Marketing and Promotion: To promote our Services, offer discounts, and provide special offers.</li>
+                      </ul> 
+                    </h5>
+                    <br><br>
+                    <h3 class="fw-bold">Sharing Your Information</h3><br>
+                    <h5>
+                      We may share your personal data with third-party service providers, partners, or affiliates, including:<br>
+                      <ul>
+                        <li>Service Providers: Companies that provide services on our behalf, such as hosting, maintenance, and support.</li>
+                        <li>Partners and Affiliates: Companies that partner with us to offer joint products or services.</li>
+                        <li>Analytics and Marketing: Companies that help us analyze usage patterns and improve our marketing efforts.</li><br>
+                      </ul>
+                      
+                        We may also disclose your personal data:
+                        <br>
+                      <ul>
+                        <li>To comply with laws and regulations</li>
+                        <li>To respond to subpoenas, court orders, or other legal processes</li>
+                        <li>To protect our rights, property, or safety, or that of our users or the public</li>
+                      </ul>
+                    </h5>
+                    <br><br>
+                    <h3 class="fw-bold">Cookies and Tracking Technologies</h3><br>
+                    <h5>
+                      We use cookies and other tracking technologies to collect data about your use of our Site and Services. These technologies help us:<br>
+                     <ul>
+                        <li>Remember your preferences and settings</li>
+                        <li>Analyze usage patterns and improve our Services</li>
+                        <li>Personalize your experience and provide targeted advertising</li>
+                      </ul> 
+                      You can control cookies and other tracking technologies through your browser settings or by using third-party tools.
+                    </h5>
+                    <br><br>
+                    <h3 class="fw-bold">Data Security</h3><br>
+                    <h5>
+                      We take reasonable measures to protect your personal data from unauthorized access, disclosure, alteration, or destruction. These measures include:
+                      <br>
+                      <ul>
+                        <li>Encryption</li>
+                        <li>Firewalls</li>
+                        <li>Access controls</li>
+                        <li>Regular security audits and testing</li>
+                      </ul>
+                    </h5>
+                    <br><br>
+                    <h3 class="fw-bold">Data Retention</h3><br>
+                    <h5>
+                      We retain your personal data for as long as necessary to provide our Services, or as required by law. When you delete your account, we will delete your personal data within a reasonable timeframe.
+                    </h5>
+                    <br><br>
+                    <h3 class="fw-bold">Your Rights</h3><br>
+                    <h5>
+                      You have the right to:<br>
+                      <ul>
+                        <li>Access and update your personal data</li>
+                        <li>Correct or delete your personal data</li>
+                        <li>Object to or restrict processing of your personal data</li>
+                        <li>Withdraw your consent for processing your personal data</li>
+                      </ul><br>
+                      To exercise these rights, please contact us at <a href="#">prepit.quiz@gmail.com</a>
+                    </h5>
+          </h5>
+    </div>
+   
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script>
+      $(document).ready(function(){
+          $("#deleteacc").click(function(){
+            $("#settings").css("opacity","0");
+          })
+        })
+    </script>
+
+{% endblock %}

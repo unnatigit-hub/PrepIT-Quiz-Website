@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+{% load static%}
+
+{% block content %}
+
+    <!----------main-------------->
+    <div class="container my-4 px-3">
+        <h1 class="text-center fw-bold mb-4 bg-">About Us</h1>
+            <h5>
+                <h3 class="fw-bold"><i class="fa-solid fa-brain text-secondary"></i> About Us – PrepIT</h3><br>
+                <h5>
+                    <span><a href="/" class="text-decoration-none fw-bold large">PrepIT</a></span> is an innovative, quiz-based placement preparation platform designed to help students, fresh graduates, and job seekers become more confident and capable in cracking campus and off-campus recruitment exams. In today’s rapidly evolving job market, academic knowledge alone is no longer sufficient. Companies are increasingly looking for candidates who are not only smart but also practically skilled and assessment-ready. PrepIT aims to bridge this skill gap by providing a real-time testing environment that mimics the actual recruitment process.
+                </h5><br>
+                <h5>At PrepIT, we believe that every learner deserves a smart and structured path to success. That’s why we built a platform that focuses on continuous skill improvement, data-driven performance analysis, and a fun, gamified approach to learning. With a clean user interface, categorized quiz topics, and detailed result breakdowns, users can track their progress, identify strengths, and work on their weaknesses — all from the comfort of their devices.
+                </h5><br><br>
+                
+                <h3 class="fw-bold"><i class="fa-sharp-duotone fa-solid fa-briefcase" style="color: darkred;"></i> What We Offer</h3><br>
+                <h5>
+                    <ul>
+                        <li><span class="fw-bold">Subject-Wise & Company-Specific Quizzes</span> <br>
+                            Practice quizzes in Aptitude, Programming, and Core Computer Fundamentals like DBMS, OS, and Networking. Users can also prepare for company-specific test patterns.</li><br>
+                        <li><span class="fw-bold">Dynamic Performance Reports</span><br>
+                            After every quiz, users receive a detailed performance analysis — including correct/incorrect answers, scores, and review sections to help learn from mistakes.</li><br>
+                        <li><span class="fw-bold">User-Friendly Interface</span><br>
+                            PrepIT is designed with students in mind. Whether it’s registering, updating a profile, starting a quiz, or checking results — everything is easy, fast, and intuitive.</li><br>
+                        <li><span class="fw-bold">Admin Dashboard</span><br>
+                            For content managers or educational institutions, PrepIT offers an admin panel to manage users, add/edit questions, view feedback, and oversee quiz performance data.</li><br>
+                        <li><span class="fw-bold">Feedback System & Community Interaction</span><br>
+                            We welcome feedback from learners, helping us continuously improve and stay aligned with user needs.</li>
+                    </ul>
+                </h5><br><br>
+                    
+                <h3 class="fw-bold"><i class="fa-sharp-duotone fa-solid fa-bullseye text-danger"></i> Our Mission</h3><br>
+                <h5>
+                    To make placement preparation accessible, effective, and personalized. We aim to equip every learner with the tools they need to confidently appear in any test and step into their career journey with clarity and confidence.
+                </h5><br><br>
+                    
+                <h3 class="fw-bold"><i class="fa-sharp-duotone fa-solid fa-globe text-primary"></i> Who Can Use PrepIT?</h3><br>
+                <h5>
+                    <ul>
+                        <li>Students preparing for campus placements</li>
+                        <li>Fresh graduates looking for job-readiness tools</li>
+                        <li>Coaching institutes offering test prep services</li>
+                        <li>Colleges seeking a centralized platform for student skill assessments</li>
+                    </ul>
+                </h5><br><br>
+                  
+            </h5>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $("#deleteacc").click(function(){
+              $("#settings").css("opacity","0");
+            })
+          })
+    </script>
+      
+{% endblock %}
+

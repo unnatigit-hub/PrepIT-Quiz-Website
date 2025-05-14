@@ -1,0 +1,222 @@
+{% extends 'base.html'%}
+{% load static%}
+
+{% block content %}
+<!-----------------hero section-------------------->
+      <section class="py-5 bg-white">
+        <div class="container">
+          <div class="row align-items-center">
+            <div class="col-md-7">
+              <div>
+                <img src="{% static './images/hero.webp'%}" class="img-fluid" alt="">
+              </div>
+            </div>
+            <div class="col-md-5">
+              <div>
+                <h2 class="fw-bold display-3 mb-3 me-2">
+                  Test. Improve.<br> <span class="text-color fw-bold">Get Placed!</span> 
+                </h2>
+                <p class="text-secondary fs-4 me-3">
+                   Crack Aptitude, Programming & Fundamentals
+                   with Real-time quizzes And Boost Your Placement Readiness with Us!
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+
+<!--------------section 1------------------>
+      {% for c in categories %}
+      <section class="py-5 bg-light">
+        <div class="text-center">
+          <h2 class="text-center fw-bold mb-4 position-relative title">Learn {{ c.main_category_name }}</h2>
+        </div>
+        <div class="container">
+          
+          <div class="row">
+            {% for sc in subcategories %}
+              {% if c.id == sc.main_category_id %}
+              <div class="col-md-4">
+                <a href="/questionblock/{{sc.id}}" class="text-decoration-none">
+                  <div class="box{{c.id}} rounded p-5 text-center rounded-3">
+                    <i class="{{ sc.icons }} fs-1 text-white mb-3"></i>
+                    <h4 class="text-white fs-3" style="font-size:22px !important;">
+                      {{ sc.category_name }}
+                    </h4>
+                  </div>
+                </a>
+              </div>
+              {% endif %}
+            {% endfor %}
+            
+          </div>
+        </div>
+      </section>
+      {% endfor %}
+
+  <!-------------section 4 - why choose us?----------->
+    <div>
+      <div class="container shadow py-4 mt-5 mb-5">
+        <div class="row">
+          <h1 class="fw-bold text-center mb-4 p-2">Why Choose Us ?</h1>
+            <div class="col-md-3">
+              <div class="text-center py-5 icon-box">
+                <i class="fa-solid fa-list-check fontsize"></i>
+              </div>
+              <div class="text-center py-5 icon-box">
+                <i class="fa-solid fa-laptop-code fontsize"></i>
+              </div>
+              <div class="text-center py-5 icon-box">
+                <i class="fa-solid fa-rocket fontsize"></i>
+              </div>
+              <div class="text-center py-5 icon-box">
+                <i class="fa-solid fa-users-between-lines fontsize"></i>
+              </div>
+              <div class="text-center py-5 icon-box">
+                <i class="fa-solid fa-pen-to-square fontsize"></i>
+              </div>
+            </div>
+            <div class="col-md-8">
+              <div class="py-3">
+                <h2 class="mb-4 border bg-dark text-white rounded-pill p-3 px-4">Real Exam-Like Quizzes</h2>
+                  <h4 class="px-3">Practice with company-specific and subject-wise quizzes designed to match actual placement tests.</h4>
+              </div>
+              <div class="py-3">
+                <h2 class="mb-4 border bg-dark text-white rounded-pill p-3 px-4">Aptitude, Coding & Interview Readiness</h2>
+                  <h4 class="px-3">From logical reasoning to technical coding challenges, we cover everything you need to ace your 
+                    placements.</h4>
+              </div>
+              <div class="py-3">
+                <h2 class="mb-4 border bg-dark text-white rounded-pill p-3 px-4">Gamified Quizzes </h2>
+                  <h4 class="px-3">Level up your skills with fun, competitive quizzes that make learning exciting.</h4>
+              </div>
+              <div class="py-3">
+                <h2 class="mb-4 border bg-dark text-white rounded-pill p-3 px-4">Community Support</h2>
+                  <h4 class="px-3">Join our vibrant community of learners, where you can connect with peers, share knowledge, and stay motivated throughout your learning journey.</h4>
+              </div>
+              <div class="py-3">
+                <h2 class="mb-4 border bg-dark text-white rounded-pill p-3 px-4">Continuous Improvement</h2>
+                  <h4 class="px-3">We continuously update and refine our content to ensure that you receive the best possible learning experience.</h4>
+              </div>
+              </div>
+            </div>
+        </div>
+      </div>
+    </div>
+
+
+    <!---------Testimonial------------>
+  <div class="bg-light testimonials py-4">
+    <div class="container">
+      <div>
+        <h3 class="text-center py-2">Testimonial</h3>
+        <h1 class="text-center py-1">  What Our Customers Say ?</h1>
+        <div class="owl-carousel owl-theme">
+         {% for f in feedbacks %}
+          <div class="item">
+            <div class="card p-5 py-5">
+              <i class="fa-solid fa-quote-left fs-1 mb-3"></i>
+              <p class="mb-4">{{ f.description }}</p>
+              <div class="d-flex align-items-center gap-3">
+                <img src="/media/{{ f.profile }}" width="80" alt="" class="rounded-circle">
+                <div>
+                  <div class="fw-bold">{{ f.name }}</div>
+                  <div class="text-secondary">{{ f.role }}</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          {% endfor %}
+            
+      </div>
+    <a href="#feedback" data-bs-toggle="modal" class="btn btn-outline-success text-center ms-auto d-block w-25 mt-3"> Add your Feedback here &#9997;</a>
+
+<!------------modal block - Feedback-------->
+<div class="modal fade overflow-hidden" id="feedback" style="z-index: 999999;">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="text-center mt-3">
+
+        <h2 class="fw-bold mb-3">Feedback Form</h2>
+      </div>
+      <form method="post" action="/feedback/" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="modal-body py-3 rounded">
+            <h5 class="fs-6 ">Username:</h5>
+            <input type="text" value="{{ request.session.usrName }}" name="username" class="form-control"></input>
+            <h5 class="mt-3">Role:</h5>
+            <select class="form-select" name="role">
+              <option>Student</option>
+              <option>Teacher</option>
+            </select>
+            <h5 class="mt-3">Image:</h5>
+            <input type="file" name="fbImage" class="form-control">
+            <h5 class="mt-3">Describe Your Feedback:</h5>
+            <textarea row="5" name="description" class="form-control"></textarea>   
+        </div>
+
+        <div class="p-2">
+          <div class="row m-0">
+            <div class="col-md-6 text-center">
+              <button type="button" class="p-2 fs-5 btn btn-primary w-100 fw-bold" data-bs-dismiss="modal">Cancel</button>
+            </div>
+            <div class="col-md-6 text-center">
+              <button type="submit" class="fw-bold p-2 text-decoration-none fs-5 btn btn-danger w-100" style="-color:red;">Submit</button>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+      </div>
+    </div>
+  </div>
+
+
+
+
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <script src="{% static './js/owl.carousel.min.js'%}"></script>
+  <script>
+      $(document).ready(function(){
+        $("#deleteacc").click(function(){
+          $("#settings").css("opacity","0");
+        })
+      })
+
+
+
+      $('.owl-carousel').owlCarousel({
+        loop:true,
+        margin:15,
+        nav:false,
+        responsive:{
+            0:{
+                items:1
+            },
+            600:{
+                items:2
+            },
+            1000:{
+                items:3
+            }
+        }
+    })
+  </script>
+  
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+

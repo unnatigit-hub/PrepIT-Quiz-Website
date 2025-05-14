@@ -1,0 +1,191 @@
+{% extends 'base.html' %}
+{% load static%}
+
+{% block content %}
+
+<!-----------------hero section-------------------->
+      <section class="py-0 bg-white">
+            <img src="/media/{{ cat.banner }}" width="100%" alt="">
+      </section>
+
+
+<!--------------Question Block------------------>
+
+<section class="py-2 mb-3 mt-3">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-9">
+              
+              {% comment %} <p>{{request.session.submitedData}} {% endcomment %}
+              {% comment %} <div>
+                <span>Total Que = {{ request.session.totalQue }}</span>
+                <span>Submitted Que = {{ request.session.submitedQue }}</span>
+              </div> {% endcomment %}
+                
+                {% for qb in questions %}
+                <div id="{{qb.id}}" style="display:none" class="b{{forloop.counter}} qb border bg-light rounded p-4">
+                  <form method="post">
+                    {% csrf_token %}
+                    <input type="hidden" name="qbId" value="{{qb.id}}">
+                    <input type="hidden" name="qNo" value="{{forloop.counter}}">
+                  <h5 class="mb-4 fw-bold">
+                     {{ forloop.counter }}. {{ qb.question }}
+                  </h5>
+
+                  <div class="radio-list">
+                    <div class="radio-item">
+                      <input name="answer{{forloop.counter}}" id="radio1{{forloop.counter}}" value="{{ qb.option_1 }}" type="radio"
+                             {% if selected_ans == qb.option_1 %}checked{% endif %}>
+                      <label for="radio1{{forloop.counter}}">{{ qb.option_1 }}</label>
+                    </div>
+                    <div class="radio-item">
+                      <input name="answer{{forloop.counter}}" id="radio2{{forloop.counter}}" value="{{ qb.option_2 }}" type="radio"
+                             {% if selected_ans == qb.option_2 %}checked{% endif %}>
+                      <label for="radio2{{forloop.counter}}">{{ qb.option_2 }}</label>
+                    </div>
+                    <div class="radio-item">
+                      <input name="answer{{forloop.counter}}" id="radio3{{forloop.counter}}" value="{{ qb.option_3 }}" type="radio"
+                             {% if selected_ans == qb.option_3 %}checked{% endif %}>
+                      <label for="radio3{{forloop.counter}}">{{ qb.option_3 }}</label>
+                    </div>
+                    <div class="radio-item">
+                      <input name="answer{{forloop.counter}}" id="radio4{{forloop.counter}}" value="{{ qb.option_4 }}" type="radio"
+                             {% if selected_ans == qb.option_4 %}checked{% endif %}>
+                      <label for="radio4{{forloop.counter}}">{{ qb.option_4 }}</label>
+                    </div>
+                  </div>
+                  
+
+                  <div class="text-end mt-3">
+                  
+                      <button id="submitButton" style="display:none;" class="btn btn-dark w-auto border-0"><a href="#submit" data-bs-toggle="modal" class="text-decoration-none text-white">Submit</a></button>
+                      <button type="button" id="nextButton" onclick="submitQue('{{forloop.counter}}','{{qb.id}}')" class="btn btn-dark w-auto border-0">Next <i class="fa-solid fa-chevron-right small"></i></button>
+                  </div>
+
+                </form>
+              </div>
+                {% endfor %}
+
+                <div id="confirmation_block" style="display:none;" class="qb border border-0 shadow rounded p-5 text-center">
+                  <img src="{% static './images/submit_image.png'%}" width="100" class="img-fluid mb-3">
+                  <h3 class="mb-4 text-dark">Are you sure<br>You want to Submit Quiz ?</h3>
+                  <a href="/result/" class="btn btn-danger">Yes,Confirm !</a>
+                  <button type="button" onclick="cancelSubmit();" class="btn btn-primary">No,Cancel !</button>
+                </div>
+            </div>
+
+            <div class="col-md-3 border bg-light rounded pt-4">
+              <h5 class="mb-2">Quiz ID : <b class="text-primary">{{request.session.tokenNo}}</b></h5>
+              <h5 class="mb-4">{{ qb.category.category_name }} Total Questions : <b class="text-success">10</b></h5>
+              <div class="q-number">
+                {% for qb in questions %}
+                    <button id="btn{{forloop.counter}}" type="button" onclick="showQuestion('{{qb.id}}')" class="btn lg btn-notvisitque">{{ forloop.counter }}</button>
+                {% endfor %}
+              </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!------------modal block - submit-------->
+<div class="modal fade overflow-hidden" id="submit" style="z-index: 9999;">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="text-center mt-3">
+
+        <h2 class="fw-bold mb-0">Confirmation</h2>
+      </div>
+      <div class="modal-body py-3 rounded text-center">
+          <div class="fs-6 ">Are you sure you want to Submit the Quiz ?</div>
+      </div>
+
+      <div class="container-fluid border">
+        <div class="row">
+          <div class="card col-md-6 text-center">
+            <a href="#" class="fw-bold p-2 text-decoration-none fs-5" data-bs-dismiss="modal">Cancel</a>
+          </div>
+          <div class="card col-md-6 text-center">
+            <a href="/result/" class="fw-bold p-2 text-decoration-none fs-5" style="color: red;">Submit</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script>
+  $(document).ready(function(){
+    $("#deleteacc").click(function(){
+      $("#settings").css("opacity","0");
+    });
+    $(".b1").show();
+  });
+  function showQuestion(id){
+    $(".qb").hide();
+    $("#"+id).show();
+  }
+
+  function cancelSubmit(){
+    $("#confirmation_block").hide();
+    $(".b1").show();
+  }
+
+  function submitQue(cnt,id){
+    var qNo = cnt;
+    var qId = id;
+    var userAnswer = $('input[name="answer'+cnt+'"]:checked').val();
+    $.ajax({
+      url:'/submitQue/',
+      type:'get',
+      dataType:'json',
+      data:{qNo:qNo,qId:qId,userAnswer:userAnswer},
+      success:function(response){
+        nextQue = parseInt(cnt)+1;
+        $(".qb").hide();
+        $(".b"+nextQue).show();
+        $("#btn"+cnt).removeClass("btn-notvisitque");
+        $("#btn"+cnt).addClass("btn-question")
+        if(cnt==10)
+        {
+          $("#confirmation_block").show();
+        }
+        
+      }
+    });
+  }
+  {% comment %} window.onload = function(){
+    document.getElementById("qsection").scrollIntoView();
+  }; {% endcomment %}
+</script>
+      
+
+  <!----------modal block----------->
+    <div class="modal fade" id="submit" style="z-index: 9999;">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="text-center mt-3">
+            <h2 class="fw-bold mb-0">Confirmation</h2>
+          </div>
+          <div class="modal-body py-3 mb-2 rounded text-center">
+              <div class="fs-6">This will submit your quiz. Are you sure you want to continue?</div>
+          </div>
+          
+          <div class="container-fluid border">
+            <div class="row">
+              <div class="card col-md-6 text-center">
+                <a href="#" class="fw-bold p-2 text-decoration-none fs-5" data-bs-dismiss="modal">Cancel</a>
+              </div>
+              <div class="card col-md-6 text-center">
+                <a href="/result/" class="fw-bold p-2 text-decoration-none fs-5" style="color: red;">Submit</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+{% endblock %}
+
+
+  

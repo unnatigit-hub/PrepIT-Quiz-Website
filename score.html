@@ -1,0 +1,78 @@
+{% extends 'base.html' %}
+{% load static%}
+
+{% block content %}
+<h1 class="text-center mt-3">View Responses</h1>
+<div class="card p-4 border-0 mb-3" id="reviewSection">
+    {% for e in entries %}
+    <div class="mb-3">
+    <p>
+        <b>{{ forloop.counter }}. {{ e.question }}.</b>
+    </p>
+
+    <div class="form-check bg-light py-2 px-3 mb-2 rounded">
+        {% if e.option_1 == e.user_answer %}
+            {% if e.option_1 == e.correct_answer %}
+                <label class="form-check-label fw-bold text-success">A. {{ e.option_1 }}</label>
+            {% else %}
+                <label class="form-check-label fw-bold text-danger">A. {{ e.option_1 }}</label>
+            {% endif %}
+        {% else %}
+            <label class="form-check-label fw-bold">A. {{ e.option_1 }}</label>
+        {% endif %}       
+    </div>
+
+    <div class="form-check bg-light py-2 px-3 mb-2 rounded">
+        {% if e.option_2 == e.user_answer %}
+            {% if e.option_2 == e.correct_answer %}
+                <label class="form-check-label fw-bold text-success">B. {{ e.option_2 }}</label>
+            {% else %}
+                <label class="form-check-label fw-bold text-danger">B. {{ e.option_2 }}</label>
+            {% endif %}
+        {% else %}
+            <label class="form-check-label fw-bold">B. {{ e.option_2 }}</label>
+        {% endif %}       
+    </div>
+
+    <div class="form-check bg-light py-2 px-3 mb-2 rounded">
+        {% if e.option_3 == e.user_answer %}
+            {% if e.option_3 == e.correct_answer %}
+                <label class="form-check-label fw-bold text-success">C. {{ e.option_3 }}</label>
+            {% else %}
+                <label class="form-check-label fw-bold text-danger">C. {{ e.option_3 }}</label>
+            {% endif %}
+        {% else %}
+            <label class="form-check-label fw-bold">C. {{ e.option_3 }}</label>
+        {% endif %}       
+    </div>
+
+    <div class="form-check bg-light py-2 px-3 mb-2 rounded">
+        {% if e.option_4 == e.user_answer %}
+            {% if e.option_4 == e.correct_answer %}
+                <label class="form-check-label fw-bold text-success">D. {{ e.option_4 }}</label>
+            {% else %}
+                <label class="form-check-label fw-bold text-danger">D. {{ e.option_4 }}</label>
+            {% endif %}
+        {% else %}
+            <label class="form-check-label fw-bold">D. {{ e.option_4 }}</label>
+        {% endif %}       
+    </div>
+
+    <br>
+    <div class="text-end">
+        <b>Correct Answer : <span class="text-success">{{ e.correct_answer }}</span></b>
+        {% comment %} <b>User Answer : <span class="text-success">{{ e.user_answer }}</span></b> {% endcomment %}
+    </div>
+</div>
+{% endfor %}
+
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script>
+    $(document).ready(function(){
+        $("#deleteacc").click(function(){
+          $("#settings").css("opacity","0");
+        })
+      })
+</script>
+
+{% endblock %}

@@ -1,0 +1,154 @@
+{% extends 'base.html' %}
+{% load static%}
+
+{% block content %}
+
+    <!----------main-------------->
+
+    <style>
+        .form-check .form-check-input{
+            margin-left:0;
+        }
+        .form-check .form-check-label{
+            padding-left:0px;
+        }
+    </style>
+    
+
+    <section class="py-5" id="resultblock">
+        <div class="container">
+            <div class="card p-4 shadow-lg border-0 mb-3">
+                <h2 class="text-center mb-4 fw-bold">Quiz Result</h2>
+
+                <div class="text-center mb-3">
+                {% if score == 100.0 %}
+                <i class="fa-sharp-duotone fa-solid fa-champagne-glasses fa-flip-horizontal text-primary mb-2 correcticon"></i>
+                    <p>Congratulations! You are passed.</p>
+                {% elif score >= 35.0 %}
+                    <i class="fa-regular fa-face-laugh-beam text-success mb-2 correcticon"></i>
+                    <p>Nice Job, You are passed !</p>
+                {% else %}
+                    <i class="fa-regular fa-face-frown-open  text-danger mb-2 correcticon"></i>
+                    <p>Sorry, Try Again! Better Luck Next Time</p>
+                {% endif %}
+                    <h5>Test Id: {{ request.session.tokenNo }}</h5>
+                </div>
+
+                <div class="mx-auto" style="width: 500px;">
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <div class="text-white rounded p-3 text-center" style="background-color: #6664EC;">
+                                Attempted Questions
+                                
+                                <h4 class="fw-bold mt-2">{{ attemptedQue }}</h4>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="text-white rounded p-3 text-center" style="background-color: #DC4327;">
+                                Not Attempted Questions
+                                <h4 class="fw-bold mt-2">{{notAttemptedQue}}</h4>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="text-white rounded p-3 text-center" style="background-color: #87ca1b;">
+                                Correct Questions
+                                <h4 class="fw-bold mt-2">{{correctQue}}</h4>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="text-white rounded p-3 text-center" style="background-color: #FBA301;">
+                                Your Score
+                                <h4 class="fw-bold mt-2">{{score}} %</h4>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="text-center mt-5">
+                        <button type="button" onclick="showSection();" class="btn btn-dark btn-sm rounded-pill px-4 fw-bold">Review Quiz</button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card p-4 shadow-lg border-0 mb-3" style="display:none" id="reviewSection">
+                {% for e in entries %}
+                <div class="mb-3">
+                <p>
+                    <b>{{ forloop.counter }}. {{ e.question }}.</b>
+                </p>
+
+                <div class="form-check bg-light py-2 px-3 mb-2 rounded">
+                    {% if e.option_1 == e.user_answer %}
+                        {% if e.option_1 == e.correct_answer %}
+                            <label class="form-check-label fw-bold text-success">A. {{ e.option_1 }}</label>
+                        {% else %}
+                            <label class="form-check-label fw-bold text-danger">A. {{ e.option_1 }}</label>
+                        {% endif %}
+                    {% else %}
+                        <label class="form-check-label fw-bold">A. {{ e.option_1 }}</label>
+                    {% endif %}       
+                </div>
+
+                <div class="form-check bg-light py-2 px-3 mb-2 rounded">
+                    {% if e.option_2 == e.user_answer %}
+                        {% if e.option_2 == e.correct_answer %}
+                            <label class="form-check-label fw-bold text-success">B. {{ e.option_2 }}</label>
+                        {% else %}
+                            <label class="form-check-label fw-bold text-danger">B. {{ e.option_2 }}</label>
+                        {% endif %}
+                    {% else %}
+                        <label class="form-check-label fw-bold">B. {{ e.option_2 }}</label>
+                    {% endif %}       
+                </div>
+
+                <div class="form-check bg-light py-2 px-3 mb-2 rounded">
+                    {% if e.option_3 == e.user_answer %}
+                        {% if e.option_3 == e.correct_answer %}
+                            <label class="form-check-label fw-bold text-success">C. {{ e.option_3 }}</label>
+                        {% else %}
+                            <label class="form-check-label fw-bold text-danger">C. {{ e.option_3 }}</label>
+                        {% endif %}
+                    {% else %}
+                        <label class="form-check-label fw-bold">C. {{ e.option_3 }}</label>
+                    {% endif %}       
+                </div>
+
+                <div class="form-check bg-light py-2 px-3 mb-2 rounded">
+                    {% if e.option_4 == e.user_answer %}
+                        {% if e.option_4 == e.correct_answer %}
+                            <label class="form-check-label fw-bold text-success">D. {{ e.option_4 }}</label>
+                        {% else %}
+                            <label class="form-check-label fw-bold text-danger">D. {{ e.option_4 }}</label>
+                        {% endif %}
+                    {% else %}
+                        <label class="form-check-label fw-bold">D. {{ e.option_4 }}</label>
+                    {% endif %}       
+                </div>
+
+                <br>
+                <div class="text-end">
+                    <b>Correct Answer : <span class="text-success">{{ e.correct_answer }}</span></b>
+                    {% comment %} <b>User Answer : <span class="text-success">{{ e.user_answer }}</span></b> {% endcomment %}
+                </div>
+            </div>
+            {% endfor %}
+
+            
+            
+            </div>
+        </div>
+    </section>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script>
+        window.onload = function(){
+          document.getElementById("resultblock").scrollIntoView();
+        };
+    </script>   
+    <script>
+        function showSection(){
+            $("#reviewSection").show();
+        }
+    </script>
+
+{% endblock %}
