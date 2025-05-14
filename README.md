@@ -1,2 +1,2 @@
 # PrepIT-Quiz-Website
-PrepIT is an innovative, quiz-based placement preparation platform designed to help students, fresh graduates, and job seekers become more confident and capable in cracking campus and off-campus recruitment exams.
+PrepIT is a web-based quiz platform designed to help students and job seekers prepare for placement exams. It offers category-wise and company-specific quizzes in areas like Aptitude, Programming, and Core Technical Subjects. Users can register, take quizzes, view detailed results, and track their performance over time. The platform also includes an admin panel for managing questions, users, and feedback. Built using Django (Python), HTML, CSS, and Bootstrap, PrepIT aims to simplify the preparation process and improve job readiness.
